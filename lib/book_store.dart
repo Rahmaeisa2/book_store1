@@ -1,3 +1,4 @@
+import 'package:book_store/feature/onboarding/presentation/onboarding_screen.dart';
 import 'package:flutter/material.dart';
 
 class BookStore extends StatelessWidget {
@@ -7,6 +8,7 @@ class BookStore extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      home: OnBoardingScreen(),
     );
   }
 }
