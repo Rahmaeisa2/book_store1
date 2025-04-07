@@ -1,6 +1,7 @@
  import 'package:book_store/feature/onboarding/presentation/widget/page_view.dart';
 import 'package:book_store/feature/splash/presentation/splash.dart';
 import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -26,7 +27,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
            crossAxisAlignment: CrossAxisAlignment.end ,
            children: [
              TextButton(onPressed: (){
-               Navigator.push(context, MaterialPageRoute(builder: (context)=> SplashScreen()));
+               Navigator.push(context, MaterialPageRoute(builder: (context)=> HomeScreen()));
 
              }, child: Text(
                "Skip",style: TextStyle(
@@ -48,7 +49,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
 
                  PageViewItem(imageUrl: "https://img.freepik.com/free-vector/lagom-life-flat-composition-room-interior-with-flowers-window-cat-reading-woman-sofa-vector-illustration_1284-77989.jpg?t=st=1743112688~exp=1743116288~hmac=5934123c2815e8b86ef8de0386ad7984b50fe1c2c6772e04b42ca662dffb56cc&w=900"
 
-                 ,  text: 'reeeeeeeeek',
+                 ,  text: 'Reading give us someplace to go when we have to stay where we are',
 
                  ),
                ],
@@ -70,7 +71,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                  InkWell(
                    onTap: () {
                      if (pageController.page?.toInt() == 2) {
-                       Navigator.push(context, MaterialPageRoute(builder: (context)=> SplashScreen()));
+                       Navigator.push(context, MaterialPageRoute(builder: (context)=> HomeScreen()));
                      }else{
                        pageController.nextPage(
                            duration: Duration(milliseconds: 600),

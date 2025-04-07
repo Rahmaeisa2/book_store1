@@ -1,6 +1,6 @@
-//flutter_native_splash:
+flutter_native_splash:
 
- // background_image: "assets/images/splash.jpeg"
+ background_image: "assets/images/splash.jpeg"
 
-//android_12:
-//image: "assets/android12splash.png"
+android_12:
+image: "assets/android12splash.png"
