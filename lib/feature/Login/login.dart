@@ -1,4 +1,6 @@
 import 'package:book_store/core/widget/custom_button.dart';
+import 'package:book_store/feature/ForgetPassword/presentation/forget_password.dart';
+import 'package:book_store/feature/register/persentation/register_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -12,6 +14,8 @@ class LoginScreen extends StatefulWidget {
 }
 class _LoginScreenState extends State<LoginScreen> {
   bool? value = false;
+  final bool _passwordVisible = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,7 +30,7 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
         title: Text("LOGIN",
         style: TextStyle(
-          fontSize: 21,
+          fontSize: 20,
           fontWeight:FontWeight.bold
         ),),
       ),
@@ -34,7 +38,7 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Padding(
           padding: const EdgeInsets.symmetric(
             horizontal: 20,
-            vertical: 50
+            vertical: 20
           ),
           child: SingleChildScrollView(
             child: Column(
@@ -42,12 +46,18 @@ class _LoginScreenState extends State<LoginScreen> {
                   CustomTextFormField(
                     title: "Email",
                     hintText: "Example@gmail.com",
+                    prefixIcon: Icon(Icons.email),
                   ),
                   SizedBox(
                     height: 19,
                   ),
-                  CustomTextFormField(title: "Password",
+                  CustomTextFormField(
+
+                    title: "Password",
                   hintText: "**********",
+                    prefixIcon: Icon(Icons.lock),
+                    isPassword: true,
+
                   ),
                   SizedBox(
                     height: 17,
@@ -57,7 +67,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Expanded(
-                          child: Checkbox(value: value, onChanged: (bool? newValue){
+                          child: Checkbox(
+                            activeColor: Colors.pink,
+                              value: value, onChanged: (bool? newValue){
                             setState(() {
                               value=newValue;
                             });
@@ -67,7 +79,10 @@ class _LoginScreenState extends State<LoginScreen> {
                           fontSize: 16 ,
                         ),),
                         Spacer(),
-                        TextButton(onPressed: (){}, child: Text(
+                        TextButton(onPressed: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>ForgetPassword()));
+
+                        }, child: Text(
                           "Forget your password?"
                               ,style: TextStyle(
                           color: Colors.pink,
@@ -89,11 +104,15 @@ class _LoginScreenState extends State<LoginScreen> {
                       Text("Don't have an account?",
                         style: TextStyle(
                           fontSize: 20,
+                          fontWeight: FontWeight.bold
                         ),),
-                      TextButton(onPressed: (){}, child: Text(
+                      TextButton(onPressed: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>RegisterScreen()));
+                      }, child: Text(
                         "Sign up",
                         style: TextStyle(
                           fontSize: 20,
+                          fontWeight: FontWeight.bold,
                           color: Colors.pink
                         ),
                       ))
