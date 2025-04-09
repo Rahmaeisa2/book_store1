@@ -10,51 +10,66 @@ class ForgetPassword extends StatefulWidget {
 }
 
 class _ForgetPasswordState extends State<ForgetPassword> {
+  TextEditingController emailController = TextEditingController();
+  final formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Form(
+      key: formKey,
+      child: Scaffold(
 
-      appBar: AppBar(
-        leading: InkWell(
-          onTap: (){
-            Navigator.pop(context);
-          },
-            child: Icon(Icons.arrow_back_ios_outlined ,)),
-        title:Text(
-          "Forget Password" , style: TextStyle(
-          fontSize: 20,
-          fontWeight: FontWeight.bold
+        appBar: AppBar(
+          leading: InkWell(
+            onTap: (){
+              Navigator.pop(context);
+            },
+              child: Icon(Icons.arrow_back_ios_outlined ,)),
+          title:Text(
+            "Forget Password" , style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold
+          ),
+          ),
         ),
-        ),
-      ),
-      body: Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: 30,
-        vertical: 40),
-        child: Center(
-          child: Column(
-            children: [
-              Text(
-                textAlign: TextAlign.center,
-                "Enter your email \n"
-                  "to reset your password",
-               style: TextStyle(
-                 fontSize: 19,
-                 fontWeight: FontWeight.w600
-               ),),
-              SizedBox(
-                height: 13,
-              ),
-              CustomTextFormField(title: "Email" ,
-                hintText: "example@gmail.com",
-              ),
-              SizedBox(
-                height: 15,
-              ),
-              CustomButton(name: "Log in ", onTap: (){}),
+        body: Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: 30,
+          vertical: 40),
+          child: Center(
+            child: Column(
+              children: [
+                Text(
+                  textAlign: TextAlign.center,
+                  "Enter your email \n"
+                    "to reset your password",
+                 style: TextStyle(
+                   fontSize: 19,
+                   fontWeight: FontWeight.w600
+                 ),),
+                SizedBox(
+                  height: 13,
+                ),
+                CustomTextFormField
+
+                    (
+                  controller:emailController,
+                  title: "Email" ,
+                  hintText: "example@gmail.com",
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                CustomButton(name: "Log in ", onTap: (){
+                  if(formKey.currentState!.validate()){
+                    ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Processing Data'))
+                    );
+                  }
+                }),
 
 
-            ],
+              ],
+            ),
           ),
         ),
       ),

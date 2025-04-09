@@ -5,13 +5,18 @@ class CustomTextFormField extends StatefulWidget {
   final String? hintText;
   final Icon? prefixIcon;
   final bool isPassword;
+  final TextEditingController controller;
+  final String? Function(String?)? validator;
 
-  const CustomTextFormField({
+
+
+  CustomTextFormField({
     super.key,
     required this.title,
     this.hintText,
     this.prefixIcon,
-    this.isPassword = false,
+    this.isPassword = false,  required this.controller, this.validator,
+
   });
 
   @override
@@ -38,7 +43,11 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         ),
         const SizedBox(height: 7),
         TextFormField(
-          //عشان اخليه لما اكتب الباسورد يبقي علي ارقام بس!z
+          controller:widget.controller,
+
+    validator: (value) => value!.isEmpty ? "This field is required" : null,
+
+    //عشان اخليه لما اكتب الباسورد يبقي علي ارقام بس!z
           keyboardType: widget.title == "Password" ? TextInputType.number : TextInputType.emailAddress,
 
           obscureText: widget.isPassword ? !_passwordVisible : false,
