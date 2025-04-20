@@ -1,11 +1,11 @@
 import 'package:book_store/core/widget/custom_button.dart';
 import 'package:book_store/feature/ForgetPassword/presentation/forget_password.dart';
-import 'package:book_store/feature/register/persentation/register_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 import '../../core/widget/custom__text_form_filed.dart';
+import '../create_account/persentation/create_account_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -52,6 +52,7 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Column(
                   children: [
                     CustomTextFormField(
+
                       controller: emailController,
                       title: "Email",
                       hintText: "Example@gmail.com",
@@ -127,7 +128,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             fontWeight: FontWeight.bold
                           ),),
                         TextButton(onPressed: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=>RegisterScreen()));
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>CreateAccount()));
                         }, child: Text(
                           "Sign up",
                           style: TextStyle(
