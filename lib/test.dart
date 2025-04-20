@@ -17,7 +17,7 @@ class TestScreen extends StatelessWidget {
         ),
       ),
       body: Center(
-        child: Text("Done" ,
+        child: Text("Home" ,
         style: TextStyle(
           fontSize: 30
         ),),
