@@ -75,6 +75,7 @@ super.dispose();
                 return Column(
                   children: [
                     CustomTextFormField(
+
                       controller: nameController,
                       hintText: 'Rahma Eisa',
                       title: "Name",

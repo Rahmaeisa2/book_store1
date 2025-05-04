@@ -29,7 +29,7 @@ class CreateAccountCubit extends Cubit<CreateAccountState> {
       debugPrint("DioException: ${response.message}");
       emit(CreateAccountError());
     } else if (response["status"] == 201) {
-      saveToken(response.data["data"]["token"]);
+      saveToken(response["data"]["token"]);
 
       emit(CreateAccountSuccess());
     } else {
