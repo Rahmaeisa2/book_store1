@@ -6,7 +6,7 @@ class CustomTextFormField extends StatefulWidget {
   final Icon? prefixIcon;
   final bool isPassword;
   final TextEditingController controller;
-  final String Function(String?)? validator;
+  final String? Function(String?)? validator;
 
 
 
@@ -16,7 +16,7 @@ class CustomTextFormField extends StatefulWidget {
     required this.title,
     this.hintText,
     this.prefixIcon,
-    this.isPassword = false,  required this.controller, this.validator,
+    this.isPassword = false,  required this.controller,  this.validator,
 
   });
 
@@ -46,10 +46,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         TextFormField(
           controller:widget.controller,
 
-    validator: (value){
-    if (value == null){
-    return "this field is required";
-    }},
+          validator:widget.validator,
 
     //عشان اخليه لما اكتب الباسورد يبقي علي ارقام بس!z
           keyboardType: widget.title == "Password" ? TextInputType.number : TextInputType.emailAddress,

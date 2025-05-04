@@ -14,6 +14,8 @@ part 'create_account_state.dart';
 
 class CreateAccountCubit extends Cubit<CreateAccountState> {
   CreateAccountCubit() : super(CreateAccountInitial());
+  String? errorMessage;
+
 
   createAccount({
    required createAccountRequestDate userData
@@ -25,6 +27,8 @@ class CreateAccountCubit extends Cubit<CreateAccountState> {
        );
 
     if (response is DioException) {
+      errorMessage = response.response?.data["errors"]["email"][0].toString();
+
       // problem in server or connection
       debugPrint("DioException: ${response.message}");
       emit(CreateAccountError());

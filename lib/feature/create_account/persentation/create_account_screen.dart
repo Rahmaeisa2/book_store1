@@ -1,6 +1,7 @@
+import 'package:book_store/core/helper/extention.dart';
 import 'package:book_store/core/widget/custom__text_form_filed.dart';
 import 'package:book_store/core/widget/custom_button.dart';
-import 'package:book_store/feature/Login/login.dart';
+import 'package:book_store/feature/Login/presentation/login.dart';
 import 'package:book_store/feature/create_account/cubit/create_account_cubit.dart';
 import 'package:book_store/feature/create_account/data/model/create_account_request_data.dart';
 import 'package:book_store/test.dart';
@@ -75,6 +76,11 @@ super.dispose();
                 return Column(
                   children: [
                     CustomTextFormField(
+                      validator: (value) {
+                        if (value?.trim() == null || value!.trim().isEmpty) {
+                          return "name is required";
+                        }
+                      },
 
                       controller: nameController,
                       hintText: 'Rahma Eisa',
@@ -83,12 +89,30 @@ super.dispose();
                     SizedBox(height: 15,),
 
                     CustomTextFormField(
+                      validator: (value) {
+                        if (value?.trim() == null || value!.trim().isEmpty) {
+                          return "email is required";
+                        }else if(!emailController.text.toString().isValidEmail){
+                          return "please enter a valid email";
+                        }
+                        else if(context.read<CreateAccountCubit>().errorMessage!=null){
+                          return context.read<CreateAccountCubit>().errorMessage;
+                        }
+                      },
                       controller: emailController,
                       title: "Email",
                       hintText: "example@gamil.com",
                       prefixIcon: Icon(Icons.email),),
                     SizedBox(height: 15,),
-                    CustomTextFormField(title: "Password",
+                    CustomTextFormField(
+                      validator: (value) {
+                        if (value?.trim() == null || value!.trim().isEmpty) {
+                          return "password is required";
+                        }else if(value.length<8){
+                          return "password must be 8 char";
+                        }
+                      },
+                      title: "Password",
                       prefixIcon: Icon(Icons.lock),
                       hintText: "********",
                       controller: passwordController,
@@ -96,6 +120,13 @@ super.dispose();
                     SizedBox(height: 15,),
 
                     CustomTextFormField(
+                      validator: (value) {
+                        if (value?.trim() == null || value!.trim().isEmpty) {
+                          return "confirmation password is required";
+                        }else if(confirmPasswordController.text!=passwordController.text){
+                          return "confirmation password must be same as password";
+                        }
+                      },
                       controller: confirmPasswordController,
                       title: "Confirm password",
                       hintText: "*********",
