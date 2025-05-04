@@ -2,6 +2,7 @@ import 'package:book_store/core/widget/custom__text_form_filed.dart';
 import 'package:book_store/core/widget/custom_button.dart';
 import 'package:book_store/feature/Login/login.dart';
 import 'package:book_store/feature/create_account/cubit/create_account_cubit.dart';
+import 'package:book_store/feature/create_account/data/model/create_account_request_data.dart';
 import 'package:book_store/test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -128,7 +129,8 @@ super.dispose();
                       LinearProgressIndicator(),
                     CustomButton(name: "Create account", onTap: () {
                       context.read<CreateAccountCubit>().createAccount(
-                          name: nameController.text, email: emailController.text, password: passwordController.text, confirmationPassword: confirmPasswordController.text);
+                        userData: createAccountRequestDate(name: nameController.text, email: emailController.text, password: passwordController.text, confirmPassword: confirmPasswordController.text)
+                        );
 
                       if (formKey.currentState!.validate()) {
                         if (formKey.currentState?.validate() ?? false) {
@@ -184,6 +186,5 @@ super.dispose();
       ),
     );
   }
-
 }
 

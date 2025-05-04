@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'feature/splash/presentation/splash.dart';
+
 class TestScreen extends StatelessWidget {
   const TestScreen({super.key});
 
@@ -9,7 +11,7 @@ class TestScreen extends StatelessWidget {
       appBar: AppBar(
         leading: InkWell(
           onTap: (){
-            Navigator.pop(context);
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>HomeScreen()));
           },
           child: Icon(
             Icons.arrow_back_ios_rounded,

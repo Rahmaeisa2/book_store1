@@ -1,8 +1,11 @@
+import 'package:book_store/core/services/local/shared_pref/shared_pref.dart';
+import 'package:book_store/core/services/local/shared_pref/shared_pref_key.dart';
 import 'package:book_store/feature/onboarding/presentation/onboarding_screen.dart';
 import 'package:book_store/test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
+import 'feature/splash/presentation/splash.dart';
 
 class BookStore extends StatefulWidget {
   const BookStore({super.key});
@@ -12,18 +15,8 @@ class BookStore extends StatefulWidget {
 }
 
 class _BookStoreState extends State<BookStore> {
-  late final SharedPreferences? prefs;
   @override
-  void initState() {
-    fatchToken();
 
-    // TODO: implement initState
-    super.initState();
-  }
-  fatchToken()async{
-    prefs = await SharedPreferences.getInstance();
-
-  }
   @override
   Widget build(BuildContext context) {
     print("get token");
@@ -34,14 +27,22 @@ class _BookStoreState extends State<BookStore> {
       splitScreenMode: true,
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home:getToken()!=null ?TestScreen(): OnBoardingScreen(),
+        home:StartScreen(),
       ),
     );
   }
 
-  String? getToken(){
-    return prefs?.getString("token");
+  Future<String?> getToken()async {
 
-
+    return SharedPref.getData(prefsKey.tokenKey);
+  }
+  Widget StartScreen(){
+    if(getToken()==null){
+      return TestScreen();
+    }else if (SharedPref.getData(prefsKey.onBoardingIsOpen)==null){
+      return HomeScreen();
+    }else{
+      return OnBoardingScreen();
+    }
   }
 }
