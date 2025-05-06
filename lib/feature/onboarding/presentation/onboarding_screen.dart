@@ -30,7 +30,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
            children: [
              TextButton(onPressed: (){
                SharedPref.saveData(key: prefsKey.onBoardingIsOpen, value: true);
-               Navigator.push(context, MaterialPageRoute(builder: (context)=> HomeScreen()));
+               Navigator.push(context, MaterialPageRoute(builder: (context)=> SplashScreen()));
 
              }, child: const Text(
                "Skip",style: TextStyle(
@@ -75,7 +75,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                    onTap: () {
                      if (pageController.page?.toInt() == 2) {
                        SharedPref.saveData(key: prefsKey.onBoardingIsOpen, value: true);
-                       Navigator.push(context, MaterialPageRoute(builder: (context)=> HomeScreen()));
+                       Navigator.push(context, MaterialPageRoute(builder: (context)=> SplashScreen()));
                      }else{
                        pageController.nextPage(
                            duration: Duration(milliseconds: 600),

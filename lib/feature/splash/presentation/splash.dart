@@ -1,3 +1,4 @@
+import 'package:book_store/feature/Login/cubit/login_cubit.dart';
 import 'package:book_store/feature/Login/presentation/login.dart';
 import 'package:book_store/feature/create_account/cubit/create_account_cubit.dart';
 import 'package:flutter/material.dart';
@@ -6,14 +7,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../core/widget/custom_button.dart';
 import '../../create_account/persentation/create_account_screen.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,8 +42,16 @@ class _HomeScreenState extends State<HomeScreen> {
                       name: "Login",
 
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (
-                            context) => LoginScreen()));
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => BlocProvider(
+                              create: (context) => LoginCubit(),
+                              child: LoginScreen(),
+                            ),
+                          ),
+
+                        );
                       },
                     ),
                     SizedBox(height: 15,),
@@ -50,12 +59,13 @@ class _HomeScreenState extends State<HomeScreen> {
                       name: "Register",
                       background: Colors.white,
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (
-                            context) =>
-                            BlocProvider(
-                              create: (context) => CreateAccountCubit(),
-                              child: CreateAccount(),
-                            )));
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (
+                                context) =>
+                                BlocProvider(
+                                  create: (context) => CreateAccountCubit(),
+                                  child: CreateAccount(),
+                                )));
                       },
                     ),
                   ],

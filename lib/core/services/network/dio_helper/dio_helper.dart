@@ -41,4 +41,12 @@ class dioHelper{
   }){
     return _dio?.post(endPoint ,data: data, queryParameters: query);
   }
+  static Future<Response?> getData({
+    required String endPoint,
+    Map<String,dynamic>? data,
+    Map<String,dynamic>? query,
+
+  })async{
+    return await _dio?.get(endPoint,data: data,queryParameters: query);
+  }
 }

@@ -38,9 +38,9 @@ class _BookStoreState extends State<BookStore> {
   }
   Widget StartScreen(){
     if(getToken()==null){
-      return TestScreen();
-    }else if (SharedPref.getData(prefsKey.onBoardingIsOpen)==null){
       return HomeScreen();
+    }else if (SharedPref.getData(prefsKey.onBoardingIsOpen)==null){
+      return SplashScreen();
     }else{
       return OnBoardingScreen();
     }

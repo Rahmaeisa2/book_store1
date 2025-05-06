@@ -65,7 +65,7 @@ super.dispose();
               listener: (context, state) {
                 debugPrint("State of create account ${state.toString()}");
                 if(state is CreateAccountSuccess){
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>TestScreen()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>HomeScreen()));
                 }else if(state is CreateAccountError){
                   ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(content: Text('Error')),);
