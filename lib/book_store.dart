@@ -1,7 +1,7 @@
 import 'package:book_store/core/services/local/shared_pref/shared_pref.dart';
 import 'package:book_store/core/services/local/shared_pref/shared_pref_key.dart';
 import 'package:book_store/feature/onboarding/presentation/onboarding_screen.dart';
-import 'package:book_store/test.dart';
+import 'package:book_store/home/presentation/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

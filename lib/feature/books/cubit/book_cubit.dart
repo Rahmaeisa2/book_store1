@@ -47,6 +47,22 @@ class BookCubit extends Cubit<BookState> {
       emit(GetBooksError("nou found, please try again!"));
     }
   }
+  ProductsResponseModel? searchResponse;
+  searchBooks(String name)async{
+    emit(SearchLoading() as BookState);
+
+    final response=await BookRepo.searchBooks(name);
+    if(response is DioException){
+      emit(SearchError(response.response?.data["message"]) as BookState);
+    }else if(response is Response){
+      searchResponse=ProductsResponseModel.fromJson(response.data);
+      debugPrint("emit succcess respnse model${searchResponse?.status}");
+
+      emit(SearchSuccess(searchResponse?.data?.books??[]) as BookState);
+    }else{
+      emit(SearchError("nou found, please try again!") as BookState);
+    }
+  }
 
 
   double startValue=10;

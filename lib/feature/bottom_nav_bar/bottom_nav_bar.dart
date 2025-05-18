@@ -1,11 +1,13 @@
-import 'package:book_store/books/presentation/books.dart';
-import 'package:book_store/bottom_nav_bar/widget/nav_bar_icon.dart';
 
+import 'package:book_store/feature/bottom_nav_bar/widget/nav_bar_icon.dart';
+import 'package:book_store/feature/profile/presentation/profile.dart';
+import 'package:book_store/home/cubit/home_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../home/presentation/home_screen.dart';
 import '../books/cubit/book_cubit.dart';
-import '../test.dart';
+import '../books/presentation/books.dart';
 
 
 class BottomNavBarScreen extends StatefulWidget {
@@ -18,13 +20,16 @@ class BottomNavBarScreen extends StatefulWidget {
 class _BottomNavBarScreenState extends State<BottomNavBarScreen> {
   int _currentIndex = 0;
   List<Widget> _screens = [
-    HomeScreen(),
+    BlocProvider(create: (context)=>HomeCubit()..getBestSellerList()..getNewArrivalsList(),
 
+    child: HomeScreen(),),
     BlocProvider(
       create: (context) => BookCubit()..getBooks(),
       child: BooksScreen(),
-    ),    HomeScreen(),
+    ),    FloatingActionButton(onPressed: () {  },),
     HomeScreen(),
+
+    ProfileScreen(),
   ];
 
   @override
@@ -71,7 +76,6 @@ class _BottomNavBarScreenState extends State<BottomNavBarScreen> {
                 }
               }
               , label: "Books", icon: Icons.book,),
-            SizedBox(),
             BottomNavBarIcon(
               isActive: _currentIndex == 3
               , onTap: () {

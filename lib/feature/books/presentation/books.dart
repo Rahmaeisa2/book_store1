@@ -1,5 +1,6 @@
 import 'package:book_store/book_store.dart';
-import 'package:book_store/books/presentation/widget/book_model.dart';
+import 'package:book_store/feature/books/presentation/widget/book_model.dart';
+import 'package:book_store/feature/books/presentation/widget/search_screen.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,6 +15,8 @@ class BooksScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return BlocBuilder<BookCubit, BookState>(
+  builder: (context, state) {
     return Column(
         children: [
           AppBar(
@@ -22,6 +25,15 @@ class BooksScreen extends StatelessWidget {
                   fontSize: 19,
                   fontWeight: FontWeight.bold
               ),),
+            actions: [
+              IconButton(onPressed: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>BlocProvider.value(
+ value: BookCubit(),
+  child: SearchScreen(),
+)));
+
+              }, icon:Icon(Icons.search , size: 27,),)
+            ],
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -113,5 +125,7 @@ class BooksScreen extends StatelessWidget {
         ],
 
     );
+  },
+);
   }
 }

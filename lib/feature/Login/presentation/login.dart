@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../bottom_nav_bar/bottom_nav_bar.dart';
 import '../../../core/widget/custom__text_form_filed.dart';
 import '../../../core/widget/custom_button.dart';
+import '../../bottom_nav_bar/bottom_nav_bar.dart';
 import '../cubit/login_cubit.dart';
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -73,6 +73,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: 12,
                   ),
                   CustomTextFormField(
+                    isPassword: true,
                     controller: passController,
                     validator: (value) {
                       if (value?.trim() == null || value!.trim().isEmpty) {

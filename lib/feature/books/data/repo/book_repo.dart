@@ -44,4 +44,24 @@ class BookRepo{
       return null;
     }
   }
+
+  static Future searchBooks(String name)async{
+    try{
+      final response=await dioHelper.getData(endPoint: endPoint.booksSearch ,
+      query: {"name" : name}
+      );
+      debugPrint("try ${response.toString()}");
+      if(response?.statusCode==200){
+        return response;
+      }else{
+        return null;
+      }
+
+    }catch(e){
+      debugPrint("catch ${e.toString()}");
+
+      return null;
+    }
+  }
+
 }
