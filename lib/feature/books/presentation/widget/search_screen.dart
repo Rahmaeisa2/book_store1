@@ -14,9 +14,14 @@ class _SearchScreenState extends State<SearchScreen> {
 @override
   void initState() {
   search.debounceTime(Duration(milliseconds: 500)).listen((v) {
-    context.read<BookCubit>().searchBooks(v ??"");
+    context.read<BookCubit>().searchBooks(v.trim());
   });
 super.initState();
+  }
+  @override
+  void dispose() {
+    search.close();
+    super.dispose();
   }
   @override
   Widget build(BuildContext context) {
@@ -49,6 +54,36 @@ super.initState();
           ),
         ),
       ),
+      body: BlocBuilder<BookCubit, BookState>(
+    builder: (context, state) {
+      if (state is SearchLoading) {
+        return const Center(child: CircularProgressIndicator());
+      } else if (state is SearchSuccess) {
+        if (state.books.isEmpty) {
+          return const Center(child: Text("No books found"));
+        }
+        return ListView.builder(
+          itemCount: state.books.length,
+          itemBuilder: (context, index) {
+            final book = state.books[index];
+            return ListTile(
+              title: Text(book.name ?? "No Name"),
+              subtitle: Text(book.category ?? ""),
+              leading: Image.network(
+                book.image ?? "",
+                width: 50,
+                height: 50,
+                fit: BoxFit.cover,
+              ),
+            );
+          },
+        );
+      } else if (state is SearchError) {
+        return Center(child: Text(state.errorMessage));
+      }
+      return const SizedBox(); // Default UI
+    },
+    ),
     );
   }
 }

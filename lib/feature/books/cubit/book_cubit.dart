@@ -48,19 +48,26 @@ class BookCubit extends Cubit<BookState> {
     }
   }
   ProductsResponseModel? searchResponse;
-  searchBooks(String name)async{
-    emit(SearchLoading() as BookState);
 
-    final response=await BookRepo.searchBooks(name);
-    if(response is DioException){
-      emit(SearchError(response.response?.data["message"]) as BookState);
-    }else if(response is Response){
-      searchResponse=ProductsResponseModel.fromJson(response.data);
-      debugPrint("emit succcess respnse model${searchResponse?.status}");
+  Future<void> searchBooks(String name) async {
+    emit(SearchLoading());
 
-      emit(SearchSuccess(searchResponse?.data?.books??[]) as BookState);
-    }else{
-      emit(SearchError("nou found, please try again!") as BookState);
+    try {
+      final response = await BookRepo.searchBooks(name);
+
+      // لو الـ response من نوع Response
+      if (response is Response) {
+        searchResponse = ProductsResponseModel.fromJson(response.data);
+        debugPrint("Emit success - status: ${searchResponse?.status}");
+        emit(SearchSuccess(searchResponse?.data?.books ?? []));
+      } else {
+        emit(SearchError("Unexpected error format, please try again!"));
+      }
+    } on DioException catch (e) {
+      final message = e.response?.data["message"] ?? "Something went wrong!";
+      emit(SearchError(message));
+    } catch (e) {
+      emit(SearchError("An unknown error occurred."));
     }
   }
 
